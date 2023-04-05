@@ -1,9 +1,9 @@
-MODEL_PATH=apps/tools/normgraph/
+MODEL_PATH=apps/tools/normgraph
 
-FIRM_LOG_LEVEL=3
-PROC_LOG_LEVEL=4
+FIRM_LOG_LEVEL=LOG_WARN
+PROC_LOG_LEVEL=LOG_INFO
 CC=clang++
-CFLAGS += -Iapps/ -Iimpl/ -O3 -std=gnu++20 ${LOG_LEVEL} -DNDEBUG
+CFLAGS += -I. -Iimpl -O3 -std=c++20 ${LOG_LEVEL} -DNDEBUG
 
 
 all: firm vectcmp format divide process
@@ -21,7 +21,7 @@ divide: ${MODEL_PATH}/divide.cpp
 	${CC} ${CFLAGS} -DLOG_LEVEL=${PROC_LOG_LEVEL} $^ -o $@
 
 process: ${MODEL_PATH}/process.cpp
-	${CC} ${CFLAGS}  -DLOG_LEVEL=${PROC_LOG_LEVEL} $^ -o $@
+	${CC} ${CFLAGS} -DLOG_LEVEL=${PROC_LOG_LEVEL} $^ -o $@
 
 clean:
 	rm -f firm vectcmp format divide process
